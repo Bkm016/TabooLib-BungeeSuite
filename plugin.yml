@@ -1,0 +1,11 @@
+name: TabooLibBungeeSuite
+main: me.skymc.taboolib.bungeesuite.TabooLibBukkit
+version: 1.0-SNAPSHOT
+author: 坏黑
+
+softdepend: [Vault]
+
+commands:
+  taboolibbungeesuite:
+    aliases: [tlibbs, tbs]
+    permission: taboolibbungeesuite.command

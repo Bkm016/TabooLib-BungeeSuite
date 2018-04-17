@@ -1,0 +1,4 @@
+name: TabooLibBungeeSuite
+main: me.skymc.taboolib.bungeesuite.TabooLibBungee
+version: 1.0-SNAPSHOT
+author: [坏黑]
