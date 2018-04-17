@@ -35,7 +35,6 @@ public void onCommand(BungeeCommandEvent e) {
     }
 }
 ```
----
   
 **BungeeCord** 向 **Bukkit** 发送数据
   
@@ -65,8 +64,7 @@ public void onCommand(BungeeCommandEvent e) {
     }
 }
 ```
-
-
+  
 ### 已实现功能
 ---
 + [x] 同时安装在 **BungeeCord** 和 **Bukkit** 中
