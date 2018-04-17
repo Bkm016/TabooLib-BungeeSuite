@@ -5,8 +5,12 @@
 ### 交流方式
 ---
 相比原版 BC 交流方式有所不同的是, 这个工具可以在单个方法内实现交流信息的**发送**与**接收**       
-每条交流信息都有独立的识别序号, **不会**因为同时发送多条信息就导致无法准确的送达返回内容         
-Bukkit 部分:  
+每条交流信息都有独立的识别序号, **不会**因为同时发送多条信息就导致无法准确的送达返回内容    
+  
+**Bukkit** 向 **BungeeCord** 发送数据
+  
+---
+**Bukkit** 部分:  
 ```java
 TBukkitChannel channel = TabooLibBukkit.getInst().getBukkitChannel();
 TBukkitChannelTask.createTask()
@@ -21,13 +25,43 @@ TBukkitChannelTask.createTask()
         }
     }).run();
 ```
-BungeeCord 部分
+**BungeeCord** 部分:
 ```java
 @EventHandler
 public void onCommand(BungeeCommandEvent e) {
     if (e.getArgs()[0].equalsIgnoreCase("Hello World!)) {
         // 返回信息
         e.response(e.getSender().getName());
+    }
+}
+```
+---
+  
+**BungeeCord** 向 **Bukkit** 发送数据
+  
+---
+**BungeeCord** 部分:
+```java
+TBungeeChannel channel = TabooLibBungee.getInstace().getBungeeChannel();
+TBungeeChannelTask.createTask()
+    .channel(channel)
+    .sender(BungeeCord.getInstace().getPlayer("BlackSKY"))
+    .command("Hello BlackSKY!")
+    .result(new TChannelResult() {
+  
+        @Override
+        public void run(String[] result) {
+            BungeeCord.getInstace().getProxy().getLogger().info("Hello: " + result[0]);
+        }
+    }).run();
+```
+**Bukkit** 部分:
+```java
+@EventHandler
+public void onCommand(BungeeCommandEvent e) {
+    if (e.getArgs()[0].equalsIgnoreCase("Hello BlackSKY!)) {
+        // 返回信息
+        e.response("BungeeCord");
     }
 }
 ```
