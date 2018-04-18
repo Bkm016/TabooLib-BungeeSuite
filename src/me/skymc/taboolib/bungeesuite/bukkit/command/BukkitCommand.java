@@ -7,8 +7,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import me.skymc.taboolib.bungeesuite.TabooLibBukkit;
+import me.skymc.taboolib.bungeesuite.bukkit.command.bungee.CommandBroadcast;
 import me.skymc.taboolib.bungeesuite.bukkit.command.bungee.CommandConnect;
 import me.skymc.taboolib.bungeesuite.bukkit.command.bungee.CommandConnectOther;
 import me.skymc.taboolib.bungeesuite.bukkit.command.bungee.CommandKickPlayer;
@@ -22,12 +26,13 @@ import me.skymc.taboolib.bungeesuite.bukkit.command.playerdata.CommandPlayerData
 import me.skymc.taboolib.bungeesuite.bukkit.command.playerdata.CommandPlayerDataSet;
 import me.skymc.taboolib.bungeesuite.logger.TLogger;
 import me.skymc.taboolib.bungeesuite.util.ArrayUtils;
+import me.skymc.taboolib.bungeesuite.util.TextCompute;
 
 /**
  * @author Bkm016
  * @since 2018-04-17
  */
-public class BukkitCommand implements CommandExecutor {
+public class BukkitCommand implements CommandExecutor, TabCompleter {
 	
 	private List<BukkitSubCommandExecutor> subCommandExecutors = new ArrayList<>();
 	
@@ -35,6 +40,7 @@ public class BukkitCommand implements CommandExecutor {
 		subCommandExecutors.add(new CommandConnect());
 		subCommandExecutors.add(new CommandConnectOther());
 		subCommandExecutors.add(new CommandMessage());
+		subCommandExecutors.add(new CommandBroadcast());
 		subCommandExecutors.add(new CommandKickPlayer());
 		subCommandExecutors.add(new CommandWhois());
 		subCommandExecutors.add(new CommandPlayerCount());
@@ -44,6 +50,20 @@ public class BukkitCommand implements CommandExecutor {
 		subCommandExecutors.add(new CommandPlayerDataSet());
 		subCommandExecutors.add(new CommandPlayerDataRemove());
 		subCommandExecutors.add(new CommandPlayerDataGet());
+	}
+	
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+		if (args.length == 1) {
+			List<String> subCommands = new ArrayList<>();
+			for (BukkitSubCommandExecutor subCommandExecutor : subCommandExecutors) {
+				if (subCommandExecutor != null && (args[0].isEmpty() || subCommandExecutor.getName().startsWith(args[0]))) {
+					subCommands.add(subCommandExecutor.getName());
+				}
+			}
+			return subCommands;
+		}
+		return null;
 	}
 
 	@Override
@@ -79,12 +99,29 @@ public class BukkitCommand implements CommandExecutor {
 				}
 				return true;
 			}
+			
+			new BukkitRunnable() {
+				
+				@Override
+				public void run() {
+					List<BukkitSubCommandExecutor> commandCompute = new ArrayList<>();
+					for (BukkitSubCommandExecutor subCommandExecutor : subCommandExecutors) {
+						if (subCommandExecutor != null) {
+							commandCompute.add(subCommandExecutor);
+						}
+					}
+					commandCompute.sort((b, a) -> Double.compare(TextCompute.similarDegree(args[0], a.getName()), TextCompute.similarDegree(args[0], b.getName())));
+					TLogger.send(sender, "§7指令 §f" + args[0] + " §7不存在");
+					TLogger.send(sender, "§7你可能需要:");
+					TLogger.send(sender, commandCompute.get(0).getCommandString(label));
+				}
+			}.runTaskAsynchronously(TabooLibBukkit.getInst());
 		}
 		return true;
 	}
 	
 	private boolean isConfirmSender(BukkitSubCommandExecutor subCommand) {
-		return !(subCommand.getType() == BukkitSubCommandType.CONSOLE && subCommand.requiredPlayer() && subCommand.getOnlinePlayer() == null);
+		return !(subCommand.requiredPlayer() && subCommand.getOnlinePlayer() == null);
 	}
 	
 	private boolean isConfirmType(CommandSender sender, BukkitSubCommandType commandType) {

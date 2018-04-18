@@ -3,9 +3,12 @@ package me.skymc.taboolib.bungeesuite.bungee.command;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.skymc.taboolib.bungeesuite.TabooLibBungee;
+import me.skymc.taboolib.bungeesuite.bungee.command.sub.CommandGroup;
 import me.skymc.taboolib.bungeesuite.bungee.command.sub.CommandPermission;
 import me.skymc.taboolib.bungeesuite.logger.TLogger;
 import me.skymc.taboolib.bungeesuite.util.ArrayUtils;
+import me.skymc.taboolib.bungeesuite.util.TextCompute;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.command.ConsoleCommandSender;
@@ -20,6 +23,7 @@ public class BungeeCommand extends Command {
 	
 	public BungeeCommand(String name) {
 		super(name);
+		subCommandExecutors.add(new CommandGroup());
 		subCommandExecutors.add(new CommandPermission());
 	}
 	
@@ -57,6 +61,22 @@ public class BungeeCommand extends Command {
 				}
 				return;
 			}
+			TabooLibBungee.getInstance().getProxy().getScheduler().runAsync(TabooLibBungee.getInstance(), new Runnable() {
+				
+				@Override
+				public void run() {
+					List<BungeeSubCommandExecutor> commandCompute = new ArrayList<>();
+					for (BungeeSubCommandExecutor subCommandExecutor : subCommandExecutors) {
+						if (subCommandExecutor != null) {
+							commandCompute.add(subCommandExecutor);
+						}
+					}
+					commandCompute.sort((b, a) -> Double.compare(TextCompute.similarDegree(args[0], a.getName()), TextCompute.similarDegree(args[0], b.getName())));
+					TLogger.send(sender, "§7指令 §f" + args[0] + " §7不存在");
+					TLogger.send(sender, "§7你可能需要:");
+					TLogger.send(sender, commandCompute.get(0).getCommandString("tlibbc"));
+				}
+			});
 		}
 	}
 	

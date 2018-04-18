@@ -6,6 +6,7 @@ import java.util.List;
 
 import me.skymc.taboolib.bungeesuite.events.BungeeCommandEvent;
 import me.skymc.taboolib.bungeesuite.logger.TLogger;
+import me.skymc.taboolib.bungeesuite.util.ArrayUtils;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.config.ServerInfo;
@@ -44,12 +45,23 @@ public class ModuleBungeeCord implements Listener {
 					TLogger.error("Invalid Player: &c" + e.getArgs()[2]);
 					return;
 				}
-				StringBuilder stringBuilder = new StringBuilder();
-				for (int i = 3 ; i < e.getArgs().length ; i++) {
-					stringBuilder.append(e.getArgs()[i]);
-					stringBuilder.append(" ");
+				player.sendMessage(new TextComponent(ArrayUtils.arrayJoin(e.getArgs(), 3)));
+			}
+			else if (e.getArgs()[1].equalsIgnoreCase("Broadcast")) {
+				List<ProxiedPlayer> players = new ArrayList<>();
+				if (e.getArgs()[2].equalsIgnoreCase("all")) {
+					players.addAll(BungeeCord.getInstance().getPlayers());
+				} else {
+					ServerInfo serverInfo = BungeeCord.getInstance().getServerInfo(e.getArgs()[2]);
+					if (serverInfo == null) {
+						TLogger.error("Invalid Server: &c" + e.getArgs()[2]);
+						return;
+					} else {
+						players.addAll(serverInfo.getPlayers());
+					}
 				}
-				player.sendMessage(new TextComponent(stringBuilder.toString().trim()));
+				TextComponent message = new TextComponent(ArrayUtils.arrayJoin(e.getArgs(), 3));
+				players.forEach(x -> x.sendMessage(message));
 			}
 			else if (e.getArgs()[1].equalsIgnoreCase("KickPlayer")) {
 				ProxiedPlayer player = BungeeCord.getInstance().getPlayer(e.getArgs()[2]);
@@ -57,12 +69,7 @@ public class ModuleBungeeCord implements Listener {
 					TLogger.error("Invalid Player: &c" + e.getArgs()[2]);
 					return;
 				}
-				StringBuilder stringBuilder = new StringBuilder();
-				for (int i = 3 ; i < e.getArgs().length ; i++) {
-					stringBuilder.append(e.getArgs()[i]);
-					stringBuilder.append(" ");
-				}
-				player.disconnect(new TextComponent(stringBuilder.toString().trim()));
+				player.disconnect(new TextComponent(ArrayUtils.arrayJoin(e.getArgs(), 3)));
 			}
 			else if (e.getArgs()[1].equalsIgnoreCase("Whois")) {
 				ProxiedPlayer player = BungeeCord.getInstance().getPlayer(e.getArgs()[2]);

@@ -4,15 +4,23 @@
  */  
 package me.skymc.taboolib.bungeesuite.util;  
   
-public class TextCompute {     
-	
-    public static double SimilarDegree(String strA, String strB){     
-        String newStrA = removeSign(strA);      
-        String newStrB = removeSign(strB);  
+public class TextCompute {    
+
+    public static double similarDegree(String strA, String strB){     
+        String newStrA = removeSign(max(strA, strB));      
+        String newStrB = removeSign(min(strA, strB));  
         int temp = Math.max(newStrA.length(), newStrB.length());      
         int temp2 = longestCommonSubstring(newStrA, newStrB).length();     
         return temp2 * 1.0 / temp;      
-    }    
+    }  
+    
+    private static String max(String strA, String strB) {
+    	return strA.length() >= strB.length() ? strA : strB;
+    }
+    
+    private static String min(String strA, String strB) {
+    	return strA.length() < strB.length() ? strA : strB;
+    }
     
     private static String removeSign(String str) {     
         StringBuffer sb = new StringBuffer();   
@@ -59,5 +67,5 @@ public class TextCompute {
             }    
         }      
        return new String(result);     
-    }    
+    }
 }   

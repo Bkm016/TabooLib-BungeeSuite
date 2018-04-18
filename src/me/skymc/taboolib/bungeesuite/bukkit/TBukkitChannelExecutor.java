@@ -42,6 +42,14 @@ public class TBukkitChannelExecutor {
 			.run();
 	}
 	
+	public void broadcast(Player sender, String target, String message) {
+		TBukkitChannelTask.createTask()
+			.channel(channel)
+			.sender(sender)
+			.command("BungeeCord", "Broadcast", target, message)
+			.run();
+	}
+	
 	public void kickPlayer(Player sender, String target, String reason) {
 		TBukkitChannelTask.createTask()
 			.channel(channel)
