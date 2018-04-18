@@ -17,13 +17,8 @@ TBukkitChannelTask.createTask()
     .channel(channel)
     .sender(Bukkit.getOnlinePlayer().iteraotr().next())
     .command("Hello World!")
-    .result(new TChannelResult() {
-  
-        @Override
-        public void run(String[] result) {
-            Bukkit.broadcastMessage("Hello: " + result[0]);
-        }
-    }).run();
+    .result(result -> Bukkit.broadcastMessage("Hello: " + result[0]))
+    .run();
 ```
 **BungeeCord** 部分:
 ```java
@@ -46,13 +41,8 @@ TBungeeChannelTask.createTask()
     .channel(channel)
     .sender(BungeeCord.getInstace().getPlayer("BlackSKY"))
     .command("Hello BlackSKY!")
-    .result(new TChannelResult() {
-  
-        @Override
-        public void run(String[] result) {
-            BungeeCord.getInstace().getProxy().getLogger().info("Hello: " + result[0]);
-        }
-    }).run();
+    .result(result -> BungeeCord.getInstace().getProxy().getLogger().info("Hello: " + result[0]))
+    .run();
 ```
 **Bukkit** 部分:
 ```java
