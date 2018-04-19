@@ -12,6 +12,7 @@ import me.skymc.taboolib.bungeesuite.listener.ListenerBukkitMessage;
 import me.skymc.taboolib.bungeesuite.logger.TLogger;
 import me.skymc.taboolib.bungeesuite.permission.PermissionBukkitHandler;
 import me.skymc.taboolib.bungeesuite.playerdata.PlayerDataBukkitHandler;
+import me.skymc.taboolib.bungeesuite.plugindata.PluginDataBukkitHandler;
 
 /**
  * @author Bkm016
@@ -29,6 +30,8 @@ public class TabooLibBukkit extends JavaPlugin {
 	private PlayerDataBukkitHandler playerDataHandler;
 	@Getter
 	private PermissionBukkitHandler permissionHandler;
+	@Getter
+	private PluginDataBukkitHandler pluginDataHandler;
 	
 	@Override
 	public void onLoad() {
@@ -42,6 +45,7 @@ public class TabooLibBukkit extends JavaPlugin {
 		bukkitChannelExecutor = new TBukkitChannelExecutor(bukkitChannel);
 		playerDataHandler = new PlayerDataBukkitHandler(bukkitChannel);
 		permissionHandler = new PermissionBukkitHandler(this);
+		pluginDataHandler = new PluginDataBukkitHandler(bukkitChannel);
 		
 		Bukkit.getPluginCommand("taboolibbungeesuite").setExecutor(new BukkitCommand());
 		Bukkit.getPluginCommand("taboolibbungeesuite").setTabCompleter(new BukkitCommand());
