@@ -81,7 +81,8 @@ public class PluginDataBungeeHandler implements Listener {
 						String key = e.getString(i);
 						String value = i++ < e.getArgs().length ? e.getString(i) : null;
 						if (value != null) {
-							configuration.set(ByteUtils.decode(key), ByteUtils.decode(value));
+							value = ByteUtils.decode(value);
+							configuration.set(ByteUtils.decode(key), value.equals("null") ? null : value);
 						}
 					}
 				} else {

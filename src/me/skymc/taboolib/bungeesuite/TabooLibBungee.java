@@ -67,5 +67,6 @@ public class TabooLibBungee extends Plugin {
 	@Override
 	public void onDisable() {
 		proxyServer.getScheduler().cancel(this);
+		pluginDataHandler.saveFile();
 	}
 }
