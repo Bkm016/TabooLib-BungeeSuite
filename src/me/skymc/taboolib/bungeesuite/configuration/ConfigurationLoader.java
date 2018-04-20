@@ -3,9 +3,8 @@ package me.skymc.taboolib.bungeesuite.configuration;
 import java.io.File;
 
 import me.skymc.taboolib.bungeesuite.logger.TLogger;
-import net.md_5.bungee.config.Configuration;
-import net.md_5.bungee.config.ConfigurationProvider;
-import net.md_5.bungee.config.YamlConfiguration;
+import me.skymc.taboolib.bungeesuite.yaml.FileConfiguration;
+import me.skymc.taboolib.bungeesuite.yaml.YamlConfiguration;
 
 /**
  * @author Bkm016
@@ -13,8 +12,7 @@ import net.md_5.bungee.config.YamlConfiguration;
  */
 public class ConfigurationLoader {
 	
-	public static Configuration load(File folder, String name) {
-		ConfigurationProvider config = ConfigurationProvider.getProvider(YamlConfiguration.class);
+	public static FileConfiguration load(File folder, String name) {
 		File file = new File(folder, name);
 		if (!file.exists()) {
 			try {
@@ -22,16 +20,10 @@ public class ConfigurationLoader {
 			} catch (Exception ignored) {
 			}
 		}
-		try {
-			return config.load(file);
-		} catch (Exception ignored) {
-			TLogger.warn("Invalid File: &4" + name);
-		}
-		return new Configuration();
+		return YamlConfiguration.loadConfiguration(file);
 	}
 	
-	public static void save(Configuration configuration, File file) {
-		ConfigurationProvider config = ConfigurationProvider.getProvider(YamlConfiguration.class);
+	public static void save(FileConfiguration configuration, File file) {
 		if (!file.exists()) {
 			try {
 				file.createNewFile();
@@ -39,7 +31,7 @@ public class ConfigurationLoader {
 			}
 		}
 		try {
-			config.save(configuration, file);
+			configuration.save(file);
 		} catch (Exception ignored) {
 			TLogger.warn("Invalid File: &4" + file.getName());
 		}

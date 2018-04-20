@@ -61,9 +61,9 @@ public class TBukkitChannel implements Listener {
 	
 	public void sendBukkitMessage(Player player, String... args) {
 		StringBuilder stringBuilder = new StringBuilder();
-		for (String value : args) {
+		for (String value : ByteUtils.serialize(args)) {
 			stringBuilder.append(value);
-			stringBuilder.append(" ");
+			stringBuilder.append("|");
 		}
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);

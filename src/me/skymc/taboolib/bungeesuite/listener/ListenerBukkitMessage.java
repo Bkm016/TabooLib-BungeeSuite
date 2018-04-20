@@ -20,7 +20,7 @@ public class ListenerBukkitMessage implements PluginMessageListener {
 	@Override
 	public void onPluginMessageReceived(String channel, Player player, byte[] data) {
 		if (channel.equalsIgnoreCase("taboolib|out")) {
-			String[] packet = ByteUtils.getStringArray(data);
+			String[] packet = ByteUtils.readPacket(data);
 			if (packet.length < 2) {
 				TLogger.error("Invalid PluginMessage: &c" + channel);
 				return;

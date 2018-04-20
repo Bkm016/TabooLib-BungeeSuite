@@ -5,7 +5,6 @@ import me.skymc.taboolib.bungeesuite.bukkit.TBukkitChannel;
 import me.skymc.taboolib.bungeesuite.bukkit.TBukkitChannelTask;
 import me.skymc.taboolib.bungeesuite.runable.TChannelResult;
 import me.skymc.taboolib.bungeesuite.util.ArrayUtils;
-import me.skymc.taboolib.bungeesuite.util.ByteUtils;
 
 /**
  * @author Bkm016
@@ -18,15 +17,6 @@ public class PluginDataBukkitHandler {
 	
 	public PluginDataBukkitHandler(TBukkitChannel channel) {
 		this.channel = channel;
-	}
-	
-	public void create(TChannelResult result, String filename) {
-		TBukkitChannelTask.createTask()
-			.channel(channel)
-			.sender(channel.getOnlinePlayer())
-			.command("PluginData", "Create", filename)
-			.result(result)
-			.run();
 	}
 	
 	public void reload(TChannelResult result, String filename) {
@@ -51,7 +41,7 @@ public class PluginDataBukkitHandler {
 		TBukkitChannelTask.createTask()
 			.channel(channel)
 			.sender(channel.getOnlinePlayer())
-			.command(ArrayUtils.addFirst(ByteUtils.encode(args), "PluginData", "Set", filename))
+			.command(ArrayUtils.addFirst(args, "PluginData", "Set", filename))
 			.run();	
 	}
 	
@@ -59,16 +49,16 @@ public class PluginDataBukkitHandler {
 		TBukkitChannelTask.createTask()
 			.channel(channel)
 			.sender(channel.getOnlinePlayer())
-			.command(ArrayUtils.addFirst(ByteUtils.encode(args), "PluginData", "Get", filename))
+			.command(ArrayUtils.addFirst(args, "PluginData", "Get", filename))
 			.result(result)
 			.run();
 	}
 	
-	public void getList(TChannelResult result, String filename, String... args) {
+	public void getList(TChannelResult result, String filename, String key) {
 		TBukkitChannelTask.createTask()
 			.channel(channel)
 			.sender(channel.getOnlinePlayer())
-			.command(ArrayUtils.addFirst(ByteUtils.encode(args), "PluginData", "GetList", filename))
+			.command("PluginData", "List", filename, key)
 			.result(result)
 			.run();
 	}

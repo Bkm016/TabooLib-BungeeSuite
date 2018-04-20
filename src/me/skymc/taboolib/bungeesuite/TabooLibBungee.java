@@ -10,7 +10,7 @@ import me.skymc.taboolib.bungeesuite.logger.TLogger;
 import me.skymc.taboolib.bungeesuite.permission.PermissionBungeeHandler;
 import me.skymc.taboolib.bungeesuite.playerdata.PlayerDataBungeeHandler;
 import me.skymc.taboolib.bungeesuite.plugindata.PluginDataBungeeHandler;
-import me.skymc.taboolib.bungeesuite.util.ProxiedPlayerTag;
+import me.skymc.taboolib.bungeesuite.util.TagUtils;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -48,7 +48,7 @@ public class TabooLibBungee extends Plugin {
 		permissionHandler = new PermissionBungeeHandler(bungeeChannel);
 		pluginDataHandler = new PluginDataBungeeHandler(this);
 		
-		ProxiedPlayerTag.getInst();
+		TagUtils.getInst();
 		
 		proxyServer.registerChannel("taboolib|in");
 		proxyServer.registerChannel("taboolib|out");

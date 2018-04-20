@@ -9,6 +9,7 @@ import me.skymc.taboolib.bungeesuite.bukkit.TBukkitChannelExecutor;
 import me.skymc.taboolib.bungeesuite.bukkit.command.BukkitCommand;
 import me.skymc.taboolib.bungeesuite.enums.ServerType;
 import me.skymc.taboolib.bungeesuite.listener.ListenerBukkitMessage;
+import me.skymc.taboolib.bungeesuite.listener.ListenerPlayer;
 import me.skymc.taboolib.bungeesuite.logger.TLogger;
 import me.skymc.taboolib.bungeesuite.permission.PermissionBukkitHandler;
 import me.skymc.taboolib.bungeesuite.playerdata.PlayerDataBukkitHandler;
@@ -52,6 +53,8 @@ public class TabooLibBukkit extends JavaPlugin {
 		
 		Bukkit.getMessenger().registerIncomingPluginChannel(this, "taboolib|out", new ListenerBukkitMessage());
 		Bukkit.getMessenger().registerOutgoingPluginChannel(this, "taboolib|in");
+		
+		Bukkit.getPluginManager().registerEvents(new ListenerPlayer(), this);
 		
 		TLogger.info("插件已载入");
 		TLogger.info("作者: &8" + getDescription().getAuthors());

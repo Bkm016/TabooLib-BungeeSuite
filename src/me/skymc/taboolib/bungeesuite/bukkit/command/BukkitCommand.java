@@ -26,7 +26,7 @@ import me.skymc.taboolib.bungeesuite.bukkit.command.playerdata.CommandPlayerData
 import me.skymc.taboolib.bungeesuite.bukkit.command.playerdata.CommandPlayerDataSet;
 import me.skymc.taboolib.bungeesuite.logger.TLogger;
 import me.skymc.taboolib.bungeesuite.util.ArrayUtils;
-import me.skymc.taboolib.bungeesuite.util.TextCompute;
+import me.skymc.taboolib.bungeesuite.util.TextUtils;
 
 /**
  * @author Bkm016
@@ -110,7 +110,7 @@ public class BukkitCommand implements CommandExecutor, TabCompleter {
 							commandCompute.add(subCommandExecutor);
 						}
 					}
-					commandCompute.sort((b, a) -> Double.compare(TextCompute.similarDegree(args[0], a.getName()), TextCompute.similarDegree(args[0], b.getName())));
+					commandCompute.sort((b, a) -> Double.compare(TextUtils.similarDegree(args[0], a.getName()), TextUtils.similarDegree(args[0], b.getName())));
 					TLogger.send(sender, "§7指令 §f" + args[0] + " §7不存在");
 					TLogger.send(sender, "§7你可能需要:");
 					TLogger.send(sender, commandCompute.get(0).getCommandString(label));
