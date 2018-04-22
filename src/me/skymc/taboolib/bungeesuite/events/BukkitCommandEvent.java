@@ -56,26 +56,6 @@ public class BukkitCommandEvent extends Event implements Cancellable {
 		TabooLibBukkit.getInst().getBukkitChannel().sendBukkitMessage(player, ArrayUtils.addFirst(args, uid.toString()));
 	}
 	
-	public String getString(int index) {
-		return getString(index, "");
-	}
-	
-	public int getInteger(int index) {
-		return getInteger(index, 0);
-	}
-	
-	public double getDouble(int index) {
-		return getDouble(index, 0);
-	}
-	
-	public long getLong(int index) {
-		return getLong(index, 0);
-	}
-	
-	public boolean getBoolean(int index) {
-		return getBoolean(index, false);
-	}
-	
 	public String getString(int index, String defaultVault) {
 		return index < args.length ? args[index] : defaultVault;
 	}
@@ -96,17 +76,17 @@ public class BukkitCommandEvent extends Event implements Cancellable {
 		}
 	}
 	
-	public long getLong(int index, long defaultVault) {
+	public boolean getBoolean(int index, boolean defaultVault) {
 		try {
-			return index < args.length ? Long.valueOf(args[index]) : defaultVault;
+			return index < args.length ? Boolean.valueOf(args[index]) : defaultVault;
 		} catch (Exception e) {
 			return defaultVault;
 		}
 	}
 	
-	public boolean getBoolean(int index, boolean defaultVault) {
+	public long getLong(int index, long defaultVault) {
 		try {
-			return index < args.length ? Boolean.valueOf(args[index]) : defaultVault;
+			return index < args.length ? Long.valueOf(args[index]) : defaultVault;
 		} catch (Exception e) {
 			return defaultVault;
 		}

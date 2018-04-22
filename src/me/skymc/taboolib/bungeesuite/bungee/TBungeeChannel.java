@@ -59,18 +59,18 @@ public class TBungeeChannel implements Listener {
 	}
 	
 	public void sendBungeeMessage(ProxiedPlayer player, String...args) {
-		TabooLibBungee.getInstance().getProxy().getScheduler().runAsync(TabooLibBungee.getInstance(), () -> player.sendData("taboolib|out", asByteArray(args)));
+		TabooLibBungee.getInstance().getProxy().getScheduler().runAsync(TabooLibBungee.getInstance(), () -> player.sendData("taboolib|out",asByteArray(args)));
 	}
 	
 	public void sendBungeeMessage(Server server, String... args) {
-		TabooLibBungee.getInstance().getProxy().getScheduler().runAsync(TabooLibBungee.getInstance(), () -> server.sendData("taboolib|out", asByteArray(args)));
+		TabooLibBungee.getInstance().getProxy().getScheduler().runAsync(TabooLibBungee.getInstance(), () -> server.sendData("taboolib|out",asByteArray(args)));
 	}
 	
 	private byte[] asByteArray(String[] args) {
 		StringBuilder stringBuilder = new StringBuilder();
-		for (String value : ByteUtils.serialize(args)) {
+		for (String value : args) {
 			stringBuilder.append(value);
-			stringBuilder.append("|");
+			stringBuilder.append(" ");
 		}
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);

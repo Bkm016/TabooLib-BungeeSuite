@@ -5,7 +5,7 @@ import java.util.Arrays;
 import me.skymc.taboolib.bungeesuite.events.BungeeCommandEvent;
 import me.skymc.taboolib.bungeesuite.logger.TLogger;
 import me.skymc.taboolib.bungeesuite.util.ArrayUtils;
-import me.skymc.taboolib.bungeesuite.util.TagUtils;
+import me.skymc.taboolib.bungeesuite.util.ProxiedPlayerTag;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -28,13 +28,13 @@ public class PlayerDataBungeeHandler implements Listener {
 		}
 		try {
 			if (e.getArgs()[1].equalsIgnoreCase("Set")) {
-				TagUtils.getInst().set(e.getArgs()[3], ArrayUtils.arrayJoin(e.getArgs(), 4), e.getArgs()[2]);
+				ProxiedPlayerTag.getInst().set(e.getArgs()[3], ArrayUtils.arrayJoin(e.getArgs(), 4), e.getArgs()[2]);
 			}
 			else if (e.getArgs()[1].equalsIgnoreCase("Remove")) {
-				TagUtils.getInst().remove(e.getArgs()[3], e.getArgs()[2]);
+				ProxiedPlayerTag.getInst().remove(e.getArgs()[3], e.getArgs()[2]);
 			}
 			else if (e.getArgs()[1].equalsIgnoreCase("Get")) {
-				String result = TagUtils.getInst().getString(e.getArgs()[3], e.getArgs()[2]);
+				String result = ProxiedPlayerTag.getInst().getString(e.getArgs()[3], e.getArgs()[2]);
 				e.response(result == null ? "null" : result);
 			}
 		} catch (Exception err) {

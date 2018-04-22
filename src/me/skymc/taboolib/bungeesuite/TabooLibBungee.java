@@ -9,8 +9,7 @@ import me.skymc.taboolib.bungeesuite.listener.ListenerBungeeMessage;
 import me.skymc.taboolib.bungeesuite.logger.TLogger;
 import me.skymc.taboolib.bungeesuite.permission.PermissionBungeeHandler;
 import me.skymc.taboolib.bungeesuite.playerdata.PlayerDataBungeeHandler;
-import me.skymc.taboolib.bungeesuite.plugindata.PluginDataBungeeHandler;
-import me.skymc.taboolib.bungeesuite.util.TagUtils;
+import me.skymc.taboolib.bungeesuite.util.ProxiedPlayerTag;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -31,8 +30,6 @@ public class TabooLibBungee extends Plugin {
 	private PlayerDataBungeeHandler playerDataHandler;
 	@Getter
 	private PermissionBungeeHandler permissionHandler;
-	@Getter
-	private PluginDataBungeeHandler pluginDataHandler;
 	
 	@Override
 	public void onLoad() {
@@ -46,9 +43,8 @@ public class TabooLibBungee extends Plugin {
 		bungeeChannel = new TBungeeChannel(this);
 		playerDataHandler = new PlayerDataBungeeHandler(this);
 		permissionHandler = new PermissionBungeeHandler(bungeeChannel);
-		pluginDataHandler = new PluginDataBungeeHandler(this);
 		
-		TagUtils.getInst();
+		ProxiedPlayerTag.getInst();
 		
 		proxyServer.registerChannel("taboolib|in");
 		proxyServer.registerChannel("taboolib|out");
@@ -67,6 +63,5 @@ public class TabooLibBungee extends Plugin {
 	@Override
 	public void onDisable() {
 		proxyServer.getScheduler().cancel(this);
-		pluginDataHandler.saveFile();
 	}
 }
