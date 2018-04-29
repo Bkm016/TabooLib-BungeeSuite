@@ -116,7 +116,7 @@ TabooLibBukkit.getInst().getBukkitChannelExecutor().playerList(sender, sevrer, n
 + [x] 临时玩家数据
 + [ ] 永久玩家数据
 + [ ] 临时插件数据
-+ [ ] 永久插件数据
++ [X] 永久插件数据
 + [x] 子服权限查询
 + [x] 命令自动补全
 + [x] 错误子命令相似度匹配
