@@ -18,12 +18,14 @@ public class ArrayUtils {
 		return list;
 	}
 	
-	public static String[] addFirst(String[] args, String value) {
+	public static String[] addFirst(String[] args, String... value) {
 		if (args.length < 1) {
-			return new String[] { value };
+			return value;
 		}
 		List<String> list = asList(args);
-		list.add(0, value);
+		for (int i = value.length - 1 ; i >= 0 ; i--) {
+			list.add(0, value[i]);
+		}
 		return list.toArray(new String[0]);
 	}
 	

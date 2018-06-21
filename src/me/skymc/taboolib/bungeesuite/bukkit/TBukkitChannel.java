@@ -53,7 +53,10 @@ public class TBukkitChannel implements Listener {
 		}
 		for (TBukkitChannelTask task : tasks) {
 			if (task.getUid().equals(e.getUid())) {
-				task.getRunnable().run(e.getArgs());
+				try {
+					task.getRunnable().run(e.getArgs());
+				} catch (Exception ignored) {
+				}
 				tasks.remove(task);
 			}
 		}
@@ -61,9 +64,9 @@ public class TBukkitChannel implements Listener {
 	
 	public void sendBukkitMessage(Player player, String... args) {
 		StringBuilder stringBuilder = new StringBuilder();
-		for (String value : args) {
+		for (String value : ByteUtils.serialize(args)) {
 			stringBuilder.append(value);
-			stringBuilder.append(" ");
+			stringBuilder.append("|");
 		}
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);

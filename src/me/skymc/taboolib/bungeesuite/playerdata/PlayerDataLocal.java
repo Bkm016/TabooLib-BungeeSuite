@@ -1,6 +1,6 @@
 package me.skymc.taboolib.bungeesuite.playerdata;
 
-import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import lombok.Getter;
 import me.skymc.taboolib.bungeesuite.TabooLibBukkit;
@@ -19,9 +19,10 @@ public class PlayerDataLocal {
 	@Getter
 	private String server = "NULL";
 	
-	public PlayerDataLocal(String username) {
-		this.username = username;
-		TabooLibBukkit.getInst().getBukkitChannelExecutor().whois(Bukkit.getOnlinePlayers().iterator().next(), username, new TChannelResult() {
+	public PlayerDataLocal(Player player) {
+		this.username = player.getName();
+		
+		TabooLibBukkit.getInst().getBukkitChannelExecutor().whois(player, username, new TChannelResult() {
 			
 			@Override
 			public void run(String[] result) {

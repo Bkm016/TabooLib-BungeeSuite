@@ -21,7 +21,7 @@ public class ListenerBungeeMessage implements Listener {
 	@EventHandler
 	public void onMessage(PluginMessageEvent e) {
 		if (!e.isCancelled() && e.getSender() instanceof Server && e.getTag().equalsIgnoreCase("taboolib|in")) {
-			String[] packet = ByteUtils.getStringArray(e.getData());
+			String[] packet = ByteUtils.readPacket(e.getData());
 			if (packet.length < 2) {
 				TLogger.error("Invalid PluginMessage: " + e.getTag());
 				return;

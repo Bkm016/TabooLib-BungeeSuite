@@ -1,5 +1,11 @@
 package me.skymc.taboolib.bungeesuite.playerdata;
 
+import java.util.HashMap;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import lombok.Getter;
 import me.skymc.taboolib.bungeesuite.bukkit.TBukkitChannel;
 import me.skymc.taboolib.bungeesuite.bukkit.TBukkitChannelTask;
@@ -13,9 +19,18 @@ public class PlayerDataBukkitHandler {
 	
 	@Getter
 	private TBukkitChannel channel;
+	@Getter
+	private HashMap<String, PlayerDataLocal> playerdatas = new HashMap<>();
 	
 	public PlayerDataBukkitHandler(TBukkitChannel channel) {
 		this.channel = channel;
+		new BukkitRunnable() {
+			
+			@Override
+			public void run() {
+				Bukkit.getOnlinePlayers().forEach(x -> loadPlayerDataLocal(x));
+			}
+		}.runTaskTimerAsynchronously(channel.getPlugin(), 0, 20 * 30);
 	}
 	
 	public void setPlayerData(String target, String key, String value) {
@@ -41,5 +56,17 @@ public class PlayerDataBukkitHandler {
 			.command("PlayerData", "Get", target, key)
 			.result(runnable)
 			.run();
+	}
+	
+	public PlayerDataLocal getPlayerDataLocal(Player player) {
+		return playerdatas.get(player.getName());
+	}
+	
+	public void loadPlayerDataLocal(Player player) {
+		playerdatas.put(player.getName(), new PlayerDataLocal(player));
+	}
+	
+	public void unloadPlayerDataLocal(Player player) {
+		playerdatas.remove(player.getName());
 	}
 }
