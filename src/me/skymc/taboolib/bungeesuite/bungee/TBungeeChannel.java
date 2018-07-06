@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import lombok.Getter;
 import me.skymc.taboolib.bungeesuite.TabooLibBungee;
 import me.skymc.taboolib.bungeesuite.events.BungeeCommandEvent;
+import me.skymc.taboolib.bungeesuite.logger.TLogger;
 import me.skymc.taboolib.bungeesuite.timeable.Timeable;
 import me.skymc.taboolib.bungeesuite.util.ByteUtils;
 import net.md_5.bungee.BungeeCord;
@@ -33,13 +34,17 @@ public class TBungeeChannel implements Listener {
 			
 			@Override
 			public void run() {
-				for (TBungeeChannelTask task : tasks) {
-					if (task instanceof Timeable && ((Timeable) task).isTimeLess()) {
-						tasks.remove(task);
-						if (task.getRunnableTimeless() != null) {
-							task.getRunnableTimeless().run();
+				try {
+					for (TBungeeChannelTask task : tasks) {
+						if (task instanceof Timeable && ((Timeable) task).isTimeLess()) {
+							tasks.remove(task);
+							if (task.getRunnableTimeless() != null) {
+								task.getRunnableTimeless().run();
+							}
 						}
 					}
+				} catch (Exception e) {
+					TLogger.error("BungeeTask Error: " + e.toString());
 				}
 			}
 		}, 1, 1, TimeUnit.SECONDS);

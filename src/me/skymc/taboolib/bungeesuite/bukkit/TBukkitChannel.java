@@ -13,6 +13,7 @@ import org.bukkit.plugin.Plugin;
 
 import lombok.Getter;
 import me.skymc.taboolib.bungeesuite.events.BukkitCommandEvent;
+import me.skymc.taboolib.bungeesuite.logger.TLogger;
 import me.skymc.taboolib.bungeesuite.timeable.Timeable;
 import me.skymc.taboolib.bungeesuite.util.ByteUtils;
 
@@ -34,13 +35,17 @@ public class TBukkitChannel implements Listener {
 			
 			@Override
 			public void run() {
-				for (TBukkitChannelTask task : tasks) {
-					if (task instanceof Timeable && ((Timeable) task).isTimeLess()) {
-						tasks.remove(task);
-						if (task.getRunnableTimeless() != null) {
-							task.getRunnableTimeless().run();
+				try {
+					for (TBukkitChannelTask task : tasks) {
+						if (task instanceof Timeable && ((Timeable) task).isTimeLess()) {
+							tasks.remove(task);
+							if (task.getRunnableTimeless() != null) {
+								task.getRunnableTimeless().run();
+							}
 						}
 					}
+				} catch (Exception e) {
+					TLogger.error("BukkitTask Error: " + e.toString());
 				}
 			}
 		}, 20, 20);
