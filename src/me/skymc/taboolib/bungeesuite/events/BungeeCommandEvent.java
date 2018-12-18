@@ -63,39 +63,39 @@ public class BungeeCommandEvent extends Event implements Cancellable {
 		return getBoolean(index, false);
 	}
 	
-	public String getString(int index, String defaultVault) {
-		return index < args.length ? args[index] : defaultVault;
+	public String getString(int index, String defaultValue) {
+		return index < args.length ? args[index] : defaultValue;
 	}
 	
-	public int getInteger(int index, int defaultVault) {
+	public int getInteger(int index, int defaultValue) {
 		try {
-			return index < args.length ? Integer.valueOf(args[index]) : defaultVault;
+			return index < args.length ? Integer.valueOf(args[index]) : defaultValue;
 		} catch (Exception e) {
-			return defaultVault;
+			return defaultValue;
 		}
 	}
 	
-	public double getDouble(int index, double defaultVault) {
+	public double getDouble(int index, double defaultValue) {
 		try {
-			return index < args.length ? Double.valueOf(args[index]) : defaultVault;
+			return index < args.length ? Double.valueOf(args[index]) : defaultValue;
 		} catch (Exception e) {
-			return defaultVault;
+			return defaultValue;
 		}
 	}
 	
-	public long getLong(int index, long defaultVault) {
+	public long getLong(int index, long defaultValue) {
 		try {
-			return index < args.length ? Long.valueOf(args[index]) : defaultVault;
+			return index < args.length ? Long.valueOf(args[index]) : defaultValue;
 		} catch (Exception e) {
-			return defaultVault;
+			return defaultValue;
 		}
 	}
 	
-	public boolean getBoolean(int index, boolean defaultVault) {
+	public boolean getBoolean(int index, boolean defaultValue) {
 		try {
-			return index < args.length ? Boolean.valueOf(args[index]) : defaultVault;
+			return index < args.length ? Boolean.valueOf(args[index]) : defaultValue;
 		} catch (Exception e) {
-			return defaultVault;
+			return defaultValue;
 		}
 	}
 }
