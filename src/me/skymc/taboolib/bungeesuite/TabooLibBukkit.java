@@ -1,9 +1,5 @@
 package me.skymc.taboolib.bungeesuite;
 
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import lombok.Getter;
 import me.skymc.taboolib.bungeesuite.bukkit.TBukkitChannel;
 import me.skymc.taboolib.bungeesuite.bukkit.TBukkitChannelExecutor;
 import me.skymc.taboolib.bungeesuite.bukkit.command.BukkitCommand;
@@ -14,6 +10,8 @@ import me.skymc.taboolib.bungeesuite.logger.TLogger;
 import me.skymc.taboolib.bungeesuite.permission.PermissionBukkitHandler;
 import me.skymc.taboolib.bungeesuite.playerdata.PlayerDataBukkitHandler;
 import me.skymc.taboolib.bungeesuite.plugindata.PluginDataBukkitHandler;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * @author Bkm016
@@ -21,19 +19,17 @@ import me.skymc.taboolib.bungeesuite.plugindata.PluginDataBukkitHandler;
  */
 public class TabooLibBukkit extends JavaPlugin {
 	
-	@Getter
 	private static TabooLibBukkit inst;
-	@Getter
 	private TBukkitChannel bukkitChannel;
-	@Getter
 	private TBukkitChannelExecutor bukkitChannelExecutor;
-	@Getter
 	private PlayerDataBukkitHandler playerDataHandler;
-	@Getter
 	private PermissionBukkitHandler permissionHandler;
-	@Getter
 	private PluginDataBukkitHandler pluginDataHandler;
-	
+
+	public static TabooLibBukkit getInst() {
+		return TabooLibBukkit.inst;
+	}
+
 	@Override
 	public void onLoad() {
 		ServerType.setServerType(ServerType.BUKKIT);
@@ -66,5 +62,25 @@ public class TabooLibBukkit extends JavaPlugin {
 	public void onDisable() {
 		Bukkit.getMessenger().unregisterIncomingPluginChannel(this);
 		Bukkit.getMessenger().unregisterOutgoingPluginChannel(this);
+	}
+
+	public TBukkitChannel getBukkitChannel() {
+		return this.bukkitChannel;
+	}
+
+	public TBukkitChannelExecutor getBukkitChannelExecutor() {
+		return this.bukkitChannelExecutor;
+	}
+
+	public PlayerDataBukkitHandler getPlayerDataHandler() {
+		return this.playerDataHandler;
+	}
+
+	public PermissionBukkitHandler getPermissionHandler() {
+		return this.permissionHandler;
+	}
+
+	public PluginDataBukkitHandler getPluginDataHandler() {
+		return this.pluginDataHandler;
 	}
 }

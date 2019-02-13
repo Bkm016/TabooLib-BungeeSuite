@@ -39,21 +39,6 @@ public class ByteUtils {
 		return varEncode;
 	}
 	
-	public static String[] readPacket(byte[] args) {
-		ByteArrayDataInput byteArrayDataInput = null;
-		String[] packet = null;
-		try {
-			byteArrayDataInput = ByteStreams.newDataInput(args);
-			packet = deSerialize(byteArrayDataInput.readUTF().split("\\|"));
-		} catch (Exception err) {
-			TLogger.error("Invalid PluginMessage: &c" + err.getMessage());
-		}
-		if (packet == null) {
-			TLogger.error("Invalid PluginMessage: &cEmpty Packet");
-		}
-		return packet;
-	}
-	
 	public static void close(Closeable closeable) {
 		try {
 			if (closeable != null) {
@@ -62,5 +47,4 @@ public class ByteUtils {
 		} catch (Exception ignored) {
 		}
 	}
-
 }

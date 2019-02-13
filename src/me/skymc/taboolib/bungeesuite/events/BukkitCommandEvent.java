@@ -1,15 +1,13 @@
 package me.skymc.taboolib.bungeesuite.events;
 
-import java.util.UUID;
-
+import me.skymc.taboolib.bungeesuite.TabooLibBukkit;
+import me.skymc.taboolib.bungeesuite.util.ArrayUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-import lombok.Getter;
-import me.skymc.taboolib.bungeesuite.TabooLibBukkit;
-import me.skymc.taboolib.bungeesuite.util.ArrayUtils;
+import java.util.UUID;
 
 /**
  * @author Bkm016
@@ -19,11 +17,8 @@ public class BukkitCommandEvent extends Event implements Cancellable {
 	
 	private static final HandlerList handlers = new HandlerList();
 	
-	@Getter
 	private Player player;
-	@Getter
 	private String[] args;
-	@Getter
 	private UUID uid;
 	private boolean cancel;
 	
@@ -110,5 +105,17 @@ public class BukkitCommandEvent extends Event implements Cancellable {
 		} catch (Exception e) {
 			return defaultVault;
 		}
+	}
+
+	public Player getPlayer() {
+		return this.player;
+	}
+
+	public String[] getArgs() {
+		return this.args;
+	}
+
+	public UUID getUid() {
+		return this.uid;
 	}
 }

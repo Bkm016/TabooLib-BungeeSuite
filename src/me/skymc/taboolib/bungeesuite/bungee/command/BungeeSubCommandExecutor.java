@@ -1,5 +1,7 @@
 package me.skymc.taboolib.bungeesuite.bungee.command;
 
+import java.util.stream.IntStream;
+
 /**
  * @author Bkm016
  * @since 2018-04-17
@@ -7,12 +9,7 @@ package me.skymc.taboolib.bungeesuite.bungee.command;
 public abstract class BungeeSubCommandExecutor implements BungeeSubCommand {
 	
 	public boolean isParameterConform(String[] args) {
-		for (int i = 0 ; i < getArgs().length ; i++) {
-			if (getArgs()[i].isRequired() && (args == null || args.length <= i)) {
-				return false;
-			}
-		}
-		return true;
+		return IntStream.range(0, getArgs().length).noneMatch(i -> getArgs()[i].isRequired() && (args == null || args.length <= i));
 	}
 	
 	public String getCommandString(String label) {

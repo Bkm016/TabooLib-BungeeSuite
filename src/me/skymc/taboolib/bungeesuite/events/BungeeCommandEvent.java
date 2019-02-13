@@ -1,13 +1,12 @@
 package me.skymc.taboolib.bungeesuite.events;
 
-import java.util.UUID;
-
-import lombok.Getter;
 import me.skymc.taboolib.bungeesuite.TabooLibBungee;
 import me.skymc.taboolib.bungeesuite.util.ArrayUtils;
 import net.md_5.bungee.api.connection.Server;
 import net.md_5.bungee.api.plugin.Cancellable;
 import net.md_5.bungee.api.plugin.Event;
+
+import java.util.UUID;
 
 /**
  * @author Bkm016
@@ -15,11 +14,8 @@ import net.md_5.bungee.api.plugin.Event;
  */
 public class BungeeCommandEvent extends Event implements Cancellable {
 	
-	@Getter
 	private Server sender;
-	@Getter
 	private String[] args;
-	@Getter
 	private UUID uid;
 	private boolean cancel;
 	
@@ -97,5 +93,17 @@ public class BungeeCommandEvent extends Event implements Cancellable {
 		} catch (Exception e) {
 			return defaultVault;
 		}
+	}
+
+	public Server getSender() {
+		return this.sender;
+	}
+
+	public String[] getArgs() {
+		return this.args;
+	}
+
+	public UUID getUid() {
+		return this.uid;
 	}
 }

@@ -1,5 +1,6 @@
 package me.skymc.taboolib.bungeesuite.util;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -18,17 +19,7 @@ public class TagUtils {
 	private static ConcurrentHashMap<String, ConcurrentHashMap<String, Object>> playerData = new ConcurrentHashMap<>();
 	
 	private TagUtils() {
-		TabooLibBungee.getInstance().getProxy().getScheduler().schedule(TabooLibBungee.getInstance(), new Runnable() {
-			
-			@Override
-			public void run() {
-				for (String player : playerData.keySet()) {
-					if (TabooLibBungee.getInstance().getProxy().getPlayer(player) == null) {
-						playerData.remove(player).clear();
-					}
-				}
-			}
-		}, 180, 180, TimeUnit.SECONDS);
+		TabooLibBungee.getInstance().getProxy().getScheduler().schedule(TabooLibBungee.getInstance(), () -> playerData.keySet().stream().filter(player -> TabooLibBungee.getInstance().getProxy().getPlayer(player) == null).forEach(player -> playerData.remove(player).clear()), 180, 180, TimeUnit.SECONDS);
 	}
 	
 	public static TagUtils getInst() {
@@ -42,13 +33,6 @@ public class TagUtils {
 		return inst;
 	}
 	
-	/**
-	 * 设置标签
-	 * 
-	 * @param ProxiedPlayer 实体
-	 * @param key 键
-	 * @param value 值
-	 */
 	public void set(String key, Object value, String player) {
 		if (contains(player)) {
 			playerData.get(player).put(key, value);
@@ -59,32 +43,14 @@ public class TagUtils {
 		}
 	}
 	
-	/**
-	 * 设置标签
-	 * 
-	 * @param key 键
-	 * @param value 值
-     */
 	public void set(String key, Object value, String... entities) {
-		for (String ProxiedPlayer : entities) set(key, value, ProxiedPlayer);
+		Arrays.stream(entities).forEach(ProxiedPlayer -> set(key, value, ProxiedPlayer));
 	}
 	
-	/**
-	 * 设置标签
-	 * 
-	 * @param key 键
-	 * @param value 值
-     */
 	public void set(String key, Object value, List<String> entities) {
-		for (String ProxiedPlayer : entities) set(key, value, ProxiedPlayer);
+		entities.forEach(ProxiedPlayer -> set(key, value, ProxiedPlayer));
 	}
 	
-	/**
-	 * 移除标签
-	 * 
-	 * @param key 键
-	 * @param ProxiedPlayer 实体
-	 */
 	public Object remove(String key, String player) {
 		if (contains(player)) {
 			playerData.get(player).remove(key);
@@ -95,54 +61,22 @@ public class TagUtils {
 		return null;
 	}
 	
-	/**
-	 * 移除标签
-	 * 
-	 * @param key 键
-	 * @param entities 实体
-	 */
 	public void remove(String key, String... entities) {
 		for (String ProxiedPlayer : entities) remove(key, ProxiedPlayer);
 	}
 	
-	/**
-	 * 移除标签
-	 * 
-	 * @param key 键
-	 * @param entities 实体
-	 */
 	public void remove(String key, List<String> entities) {
 		for (String ProxiedPlayer : entities) remove(key, ProxiedPlayer);
 	}
 	
-	/**
-	 * 检查数据
-	 * 
-	 * @param ProxiedPlayer 实体
-	 * @return boolean
-	 */
 	public boolean contains(String player) {
 		return playerData.containsKey(player);
 	}
 	
-	/**
-	 * 检查标签
-	 * 
-	 * @param key 键
-	 * @param ProxiedPlayer 实体
-	 * @return boolean
-	 */
 	public boolean hasKey(String key, String player) {
         return contains(player) && playerData.get(player).containsKey(key);
     }
 	
-	/**
-	 * 获取数据
-	 * 
-	 * @param key 键
-	 * @param ProxiedPlayer 实体
-	 * @return Object
-	 */
 	public Object get(String key, String ProxiedPlayer) {
 		if (contains(ProxiedPlayer)) {
 			return playerData.get(ProxiedPlayer).get(key);
@@ -150,13 +84,6 @@ public class TagUtils {
 		return null;
 	}
 	
-	/**
-	 * 获取数据
-	 * 
-	 * @param key 键
-	 * @param ProxiedPlayer 值
-	 * @return String
-	 */
 	public String getString(String key, String ProxiedPlayer) {
 		Object object = get(key, ProxiedPlayer);
 		if (object instanceof String) {
@@ -165,13 +92,6 @@ public class TagUtils {
 		return null;
 	}
 	
-	/**
-	 * 获取数据
-	 * 
-	 * @param key 键
-	 * @param ProxiedPlayer 值
-	 * @return int
-	 */
 	public int getInteger(String key, String ProxiedPlayer) {
 		Object object = get(key, ProxiedPlayer);
 		if (object != null) {
@@ -180,13 +100,6 @@ public class TagUtils {
 		return 0;
 	}
 	
-	/**
-	 * 获取数据
-	 * 
-	 * @param key 键
-	 * @param ProxiedPlayer 值
-	 * @return long
-	 */
 	public long getLong(String key, String ProxiedPlayer) {
 		Object object = get(key, ProxiedPlayer);
 		if (object != null) {
@@ -195,25 +108,11 @@ public class TagUtils {
 		return 0L;
 	}
 	
-	/**
-	 * 获取数据
-	 * 
-	 * @param key 键
-	 * @param ProxiedPlayer 实体
-	 * @return boolean
-	 */
 	public boolean getBoolean(String key, String ProxiedPlayer) {
         Object object = get(key, ProxiedPlayer);
         return object != null && (boolean) object;
     }
 	
-	/**
-	 * 获取数据 
-	 * 
-	 * @param key 键
-	 * @param ProxiedPlayer 实体
-	 * @return double
-	 */
 	public double getDouble(String key, String ProxiedPlayer) {
 		Object object = get(key, ProxiedPlayer);
 		if (object != null) {
@@ -222,13 +121,6 @@ public class TagUtils {
 		return 0D;
 	}
 	
-	/**
-	 * 获取数据 
-	 * 
-	 * @param key 键
-	 * @param ProxiedPlayer 实体
-	 * @return float
-	 */
 	public double getFloat(String key, String ProxiedPlayer) {
 		Object object = get(key, ProxiedPlayer);
 		if (object != null) {
@@ -237,13 +129,6 @@ public class TagUtils {
 		return 0F;
 	}
 	
-	/**
-	 * 获取数据 
-	 * 
-	 * @param key 键
-	 * @param ProxiedPlayer 实体
-	 * @return short
-	 */
 	public short getShort(String key, String ProxiedPlayer) {
 		Object object = get(key, ProxiedPlayer);
 		if (object != null) {
@@ -252,13 +137,6 @@ public class TagUtils {
 		return (short) 0;
 	}
 	
-	/**
-	 * 获取数据 
-	 * 
-	 * @param key 键
-	 * @param ProxiedPlayer 实体
-	 * @return byte
-	 */
 	public byte getByte(String key, String ProxiedPlayer) {
 		Object object = get(key, ProxiedPlayer);
 		if (object != null) {

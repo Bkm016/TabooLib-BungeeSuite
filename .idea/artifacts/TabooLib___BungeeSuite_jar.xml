@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TabooLib - BungeeSuite:jar">
+    <output-path>$PROJECT_DIR$/classes/artifacts/TabooLib___BungeeSuite_jar</output-path>
+    <root id="archive" name="TabooLib - BungeeSuite.jar">
+      <element id="module-output" name="TabooLib - BungeeSuite" />
+      <element id="dir-copy" path="$PROJECT_DIR$/resources" />
+    </root>
+  </artifact>
+</component>

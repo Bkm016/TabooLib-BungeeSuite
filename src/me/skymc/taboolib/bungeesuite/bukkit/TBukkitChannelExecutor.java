@@ -1,9 +1,7 @@
 package me.skymc.taboolib.bungeesuite.bukkit;
 
-import org.bukkit.entity.Player;
-
-import lombok.Getter;
 import me.skymc.taboolib.bungeesuite.runable.TChannelResult;
+import org.bukkit.entity.Player;
 
 /**
  * @author Bkm016
@@ -11,7 +9,6 @@ import me.skymc.taboolib.bungeesuite.runable.TChannelResult;
  */
 public class TBukkitChannelExecutor {
 	
-	@Getter
 	private TBukkitChannel channel;
 	
 	public TBukkitChannelExecutor(TBukkitChannel channel) {
@@ -92,5 +89,9 @@ public class TBukkitChannelExecutor {
 			.command("BungeeCord", "ServerList")
 			.result(runnable)
 			.run();
+	}
+
+	public TBukkitChannel getChannel() {
+		return this.channel;
 	}
 }

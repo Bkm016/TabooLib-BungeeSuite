@@ -39,19 +39,15 @@ public class CommandPlayerList extends BukkitSubCommandExecutor {
 
 	@Override
 	public void run(CommandSender sender, Command arg1, String label, String[] args) {
-		TabooLibBukkit.getInst().getBukkitChannelExecutor().playerList(getOnlinePlayer(), args[0], new TChannelResult() {
-			
-			@Override
-			public void run(String[] result) {
-				if (result[0].equals("-")) {
-					TLogger.send(sender, "&4服务器 &c" + args[0] + " &4不存在");
-				} 
-				else if (args[0].equalsIgnoreCase("all")) {
-					TLogger.send(sender, "&7当前全服玩家: &f" + Arrays.asList(result));
-				} 
-				else {
-					TLogger.send(sender, "&7服务器 &f" + args[0] + " &7当前玩家: &f" + Arrays.asList(result));
-				}
+		TabooLibBukkit.getInst().getBukkitChannelExecutor().playerList(getOnlinePlayer(), args[0], result -> {
+			if (result[0].equals("-")) {
+				TLogger.send(sender, "&4服务器 &c" + args[0] + " &4不存在");
+			}
+			else if (args[0].equalsIgnoreCase("all")) {
+				TLogger.send(sender, "&7当前全服玩家: &f" + Arrays.asList(result));
+			}
+			else {
+				TLogger.send(sender, "&7服务器 &f" + args[0] + " &7当前玩家: &f" + Arrays.asList(result));
 			}
 		});
 	}

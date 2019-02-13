@@ -2,6 +2,7 @@ package me.skymc.taboolib.bungeesuite.bukkit.command;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -54,16 +55,7 @@ public class BukkitCommand implements CommandExecutor, TabCompleter {
 	
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-		if (args.length == 1) {
-			List<String> subCommands = new ArrayList<>();
-			for (BukkitSubCommandExecutor subCommandExecutor : subCommandExecutors) {
-				if (subCommandExecutor != null && (args[0].isEmpty() || subCommandExecutor.getName().startsWith(args[0]))) {
-					subCommands.add(subCommandExecutor.getName());
-				}
-			}
-			return subCommands;
-		}
-		return null;
+		return args.length == 1 ? subCommandExecutors.stream().filter(subCommandExecutor -> subCommandExecutor != null && (args[0].isEmpty() || subCommandExecutor.getName().startsWith(args[0]))).map(BukkitSubCommand::getName).collect(Collectors.toList()) : null;
 	}
 
 	@Override

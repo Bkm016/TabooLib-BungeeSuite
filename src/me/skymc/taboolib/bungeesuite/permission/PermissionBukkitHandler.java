@@ -1,7 +1,9 @@
 package me.skymc.taboolib.bungeesuite.permission;
 
-import java.util.Arrays;
-
+import me.skymc.taboolib.bungeesuite.TabooLibBukkit;
+import me.skymc.taboolib.bungeesuite.events.BukkitCommandEvent;
+import me.skymc.taboolib.bungeesuite.logger.TLogger;
+import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,11 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
-import lombok.Getter;
-import me.skymc.taboolib.bungeesuite.TabooLibBukkit;
-import me.skymc.taboolib.bungeesuite.events.BukkitCommandEvent;
-import me.skymc.taboolib.bungeesuite.logger.TLogger;
-import net.milkbowl.vault.permission.Permission;
+import java.util.Arrays;
 
 /**
  * @author Bkm016
@@ -21,11 +19,8 @@ import net.milkbowl.vault.permission.Permission;
  */
 public class PermissionBukkitHandler implements Listener {
 	
-	@Getter
 	private Plugin plugin;
-	@Getter
 	private Permission permission;
-	@Getter
 	private boolean vaultEnable;
 	
 	public PermissionBukkitHandler(Plugin plugin) {
@@ -75,5 +70,17 @@ public class PermissionBukkitHandler implements Listener {
 		} catch (Exception ignored) {
 			return false;
 		}
+	}
+
+	public Plugin getPlugin() {
+		return this.plugin;
+	}
+
+	public Permission getPermission() {
+		return this.permission;
+	}
+
+	public boolean isVaultEnable() {
+		return this.vaultEnable;
 	}
 }

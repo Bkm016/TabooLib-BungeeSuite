@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
  * @author Bkm016
  * @since 2018-04-17
  */
-public abstract interface BukkitSubCommand {
+public interface BukkitSubCommand {
 	
 	String getName();
 	

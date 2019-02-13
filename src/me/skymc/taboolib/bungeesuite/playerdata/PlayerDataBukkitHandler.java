@@ -1,15 +1,13 @@
 package me.skymc.taboolib.bungeesuite.playerdata;
 
-import java.util.HashMap;
-
+import me.skymc.taboolib.bungeesuite.bukkit.TBukkitChannel;
+import me.skymc.taboolib.bungeesuite.bukkit.TBukkitChannelTask;
+import me.skymc.taboolib.bungeesuite.runable.TChannelResult;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import lombok.Getter;
-import me.skymc.taboolib.bungeesuite.bukkit.TBukkitChannel;
-import me.skymc.taboolib.bungeesuite.bukkit.TBukkitChannelTask;
-import me.skymc.taboolib.bungeesuite.runable.TChannelResult;
+import java.util.HashMap;
 
 /**
  * @author Bkm016
@@ -17,10 +15,8 @@ import me.skymc.taboolib.bungeesuite.runable.TChannelResult;
  */
 public class PlayerDataBukkitHandler {
 	
-	@Getter
 	private TBukkitChannel channel;
-	@Getter
-	private HashMap<String, PlayerDataLocal> playerdatas = new HashMap<>();
+	private HashMap<String, PlayerDataLocal> playerData = new HashMap<>();
 	
 	public PlayerDataBukkitHandler(TBukkitChannel channel) {
 		this.channel = channel;
@@ -59,14 +55,22 @@ public class PlayerDataBukkitHandler {
 	}
 	
 	public PlayerDataLocal getPlayerDataLocal(Player player) {
-		return playerdatas.get(player.getName());
+		return playerData.get(player.getName());
 	}
 	
 	public void loadPlayerDataLocal(Player player) {
-		playerdatas.put(player.getName(), new PlayerDataLocal(player));
+		playerData.put(player.getName(), new PlayerDataLocal(player));
 	}
 	
 	public void unloadPlayerDataLocal(Player player) {
-		playerdatas.remove(player.getName());
+		playerData.remove(player.getName());
+	}
+
+	public TBukkitChannel getChannel() {
+		return this.channel;
+	}
+
+	public HashMap<String, PlayerDataLocal> getPlayerData() {
+		return this.playerData;
 	}
 }

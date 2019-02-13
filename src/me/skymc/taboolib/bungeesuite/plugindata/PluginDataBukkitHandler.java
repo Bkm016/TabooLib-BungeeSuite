@@ -1,6 +1,5 @@
 package me.skymc.taboolib.bungeesuite.plugindata;
 
-import lombok.Getter;
 import me.skymc.taboolib.bungeesuite.bukkit.TBukkitChannel;
 import me.skymc.taboolib.bungeesuite.bukkit.TBukkitChannelTask;
 import me.skymc.taboolib.bungeesuite.runable.TChannelResult;
@@ -12,7 +11,6 @@ import me.skymc.taboolib.bungeesuite.util.ArrayUtils;
  */
 public class PluginDataBukkitHandler {
 	
-	@Getter
 	private TBukkitChannel channel;
 	
 	public PluginDataBukkitHandler(TBukkitChannel channel) {
@@ -61,5 +59,9 @@ public class PluginDataBukkitHandler {
 			.command("PluginData", "List", filename, key)
 			.result(result)
 			.run();
+	}
+
+	public TBukkitChannel getChannel() {
+		return this.channel;
 	}
 }

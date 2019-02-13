@@ -4,6 +4,8 @@ import org.bukkit.entity.Player;
 
 import me.skymc.taboolib.bungeesuite.TabooLibBukkit;
 
+import java.util.stream.IntStream;
+
 /**
  * @author Bkm016
  * @since 2018-04-17
@@ -23,12 +25,7 @@ public abstract class BukkitSubCommandExecutor implements BukkitSubCommand {
 	}
 	
 	public boolean isParameterConform(String[] args) {
-		for (int i = 0 ; i < getArgs().length ; i++) {
-			if (getArgs()[i].isRequired() && (args == null || args.length <= i)) {
-				return false;
-			}
-		}
-		return true;
+		return IntStream.range(0, getArgs().length).noneMatch(i -> getArgs()[i].isRequired() && (args == null || args.length <= i));
 	}
 	
 	public String getCommandString(String label) {

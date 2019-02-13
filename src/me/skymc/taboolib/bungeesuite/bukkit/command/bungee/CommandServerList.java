@@ -39,12 +39,6 @@ public class CommandServerList extends BukkitSubCommandExecutor {
 
 	@Override
 	public void run(CommandSender sender, Command arg1, String label, String[] args) {
-		TabooLibBukkit.getInst().getBukkitChannelExecutor().serverList(getOnlinePlayer(), new TChannelResult() {
-			
-			@Override
-			public void run(String[] result) {
-				TLogger.send(sender, "&7当前全部服务器: &f" + Arrays.asList(result));
-			}
-		});
+		TabooLibBukkit.getInst().getBukkitChannelExecutor().serverList(getOnlinePlayer(), result -> TLogger.send(sender, "&7当前全部服务器: &f" + Arrays.asList(result)));
 	}
 }

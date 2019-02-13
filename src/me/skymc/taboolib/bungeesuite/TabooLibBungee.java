@@ -1,6 +1,5 @@
 package me.skymc.taboolib.bungeesuite;
 
-import lombok.Getter;
 import me.skymc.taboolib.bungeesuite.bungee.TBungeeChannel;
 import me.skymc.taboolib.bungeesuite.bungee.command.BungeeCommand;
 import me.skymc.taboolib.bungeesuite.bungee.module.ModuleBungeeCord;
@@ -21,19 +20,17 @@ import net.md_5.bungee.api.plugin.Plugin;
  */
 public class TabooLibBungee extends Plugin {
 	
-	@Getter
 	private static TabooLibBungee instance;
-	@Getter
 	private ProxyServer proxyServer;
-	@Getter
 	private TBungeeChannel bungeeChannel;
-	@Getter
 	private PlayerDataBungeeHandler playerDataHandler;
-	@Getter
 	private PermissionBungeeHandler permissionHandler;
-	@Getter
 	private PluginDataBungeeHandler pluginDataHandler;
-	
+
+	public static TabooLibBungee getInstance() {
+		return TabooLibBungee.instance;
+	}
+
 	@Override
 	public void onLoad() {
 		ServerType.setServerType(ServerType.BUNGEECORD);
@@ -68,5 +65,25 @@ public class TabooLibBungee extends Plugin {
 	public void onDisable() {
 		proxyServer.getScheduler().cancel(this);
 		pluginDataHandler.saveFile();
+	}
+
+	public ProxyServer getProxyServer() {
+		return this.proxyServer;
+	}
+
+	public TBungeeChannel getBungeeChannel() {
+		return this.bungeeChannel;
+	}
+
+	public PlayerDataBungeeHandler getPlayerDataHandler() {
+		return this.playerDataHandler;
+	}
+
+	public PermissionBungeeHandler getPermissionHandler() {
+		return this.permissionHandler;
+	}
+
+	public PluginDataBungeeHandler getPluginDataHandler() {
+		return this.pluginDataHandler;
 	}
 }

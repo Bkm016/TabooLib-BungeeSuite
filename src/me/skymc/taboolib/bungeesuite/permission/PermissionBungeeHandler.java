@@ -1,6 +1,5 @@
 package me.skymc.taboolib.bungeesuite.permission;
 
-import lombok.Getter;
 import me.skymc.taboolib.bungeesuite.bungee.TBungeeChannel;
 import me.skymc.taboolib.bungeesuite.bungee.TBungeeChannelTask;
 import me.skymc.taboolib.bungeesuite.runable.TChannelResult;
@@ -12,7 +11,6 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
  */
 public class PermissionBungeeHandler {
 	
-	@Getter
 	private TBungeeChannel channel;
 	
 	public PermissionBungeeHandler(TBungeeChannel channel) {
@@ -37,5 +35,9 @@ public class PermissionBungeeHandler {
 			.result(runnable)
 			.timeless(timeless)
 			.run();
+	}
+
+	public TBungeeChannel getChannel() {
+		return this.channel;
 	}
 }

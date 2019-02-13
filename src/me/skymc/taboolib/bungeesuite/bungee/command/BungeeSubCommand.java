@@ -6,7 +6,7 @@ import net.md_5.bungee.api.CommandSender;
  * @author Bkm016
  * @since 2018-04-17
  */
-public abstract interface BungeeSubCommand {
+public interface BungeeSubCommand {
 	
 	String getName();
 	

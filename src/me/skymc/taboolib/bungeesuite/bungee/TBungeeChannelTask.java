@@ -1,13 +1,12 @@
 package me.skymc.taboolib.bungeesuite.bungee;
 
-import java.util.UUID;
-
-import lombok.Getter;
 import me.skymc.taboolib.bungeesuite.logger.TLogger;
 import me.skymc.taboolib.bungeesuite.runable.TChannelResult;
 import me.skymc.taboolib.bungeesuite.timeable.Timeable;
 import me.skymc.taboolib.bungeesuite.util.ArrayUtils;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+
+import java.util.UUID;
 
 /**
  * @author Bkm016
@@ -15,17 +14,11 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
  */
 public class TBungeeChannelTask extends Timeable {
 	
-	@Getter
 	private TChannelResult runnable;
-	@Getter
 	private Runnable runnableTimeless;
-	@Getter
 	private TBungeeChannel channel;
-	@Getter
 	private ProxiedPlayer target;
-	@Getter
 	private String[] commands;
-	@Getter
 	private UUID uid = UUID.randomUUID();
 	
 	private TBungeeChannelTask(long effective) {
@@ -77,5 +70,29 @@ public class TBungeeChannelTask extends Timeable {
 		if (runnable != null) {
 			channel.getTasks().add(this);
 		}
+	}
+
+	public TChannelResult getRunnable() {
+		return this.runnable;
+	}
+
+	public Runnable getRunnableTimeless() {
+		return this.runnableTimeless;
+	}
+
+	public TBungeeChannel getChannel() {
+		return this.channel;
+	}
+
+	public ProxiedPlayer getTarget() {
+		return this.target;
+	}
+
+	public String[] getCommands() {
+		return this.commands;
+	}
+
+	public UUID getUid() {
+		return this.uid;
 	}
 }

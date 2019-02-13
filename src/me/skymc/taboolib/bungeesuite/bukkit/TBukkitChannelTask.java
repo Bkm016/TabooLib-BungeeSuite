@@ -1,14 +1,12 @@
 package me.skymc.taboolib.bungeesuite.bukkit;
 
-import java.util.UUID;
-
-import org.bukkit.entity.Player;
-
-import lombok.Getter;
 import me.skymc.taboolib.bungeesuite.logger.TLogger;
 import me.skymc.taboolib.bungeesuite.runable.TChannelResult;
 import me.skymc.taboolib.bungeesuite.timeable.Timeable;
 import me.skymc.taboolib.bungeesuite.util.ArrayUtils;
+import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 /**
  * @author Bkm016
@@ -16,17 +14,11 @@ import me.skymc.taboolib.bungeesuite.util.ArrayUtils;
  */
 public class TBukkitChannelTask extends Timeable {
 	
-	@Getter
 	private TChannelResult runnable;
-	@Getter
 	private Runnable runnableTimeless;
-	@Getter
 	private TBukkitChannel channel;
-	@Getter
 	private Player sender;
-	@Getter
 	private String[] commands;
-	@Getter
 	private UUID uid = UUID.randomUUID();
 	
 	private TBukkitChannelTask(long effective) {
@@ -78,5 +70,29 @@ public class TBukkitChannelTask extends Timeable {
 		if (runnable != null) {
 			channel.getTasks().add(this);
 		}
+	}
+
+	public TChannelResult getRunnable() {
+		return this.runnable;
+	}
+
+	public Runnable getRunnableTimeless() {
+		return this.runnableTimeless;
+	}
+
+	public TBukkitChannel getChannel() {
+		return this.channel;
+	}
+
+	public Player getSender() {
+		return this.sender;
+	}
+
+	public String[] getCommands() {
+		return this.commands;
+	}
+
+	public UUID getUid() {
+		return this.uid;
 	}
 }

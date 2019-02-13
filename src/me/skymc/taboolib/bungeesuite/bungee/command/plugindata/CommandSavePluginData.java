@@ -30,6 +30,6 @@ public class CommandSavePluginData extends BungeeSubCommandExecutor {
 	@Override
 	public void run(CommandSender sender, String[] args) {
 		TabooLibBungee.getInstance().getPluginDataHandler().saveFile();
-		TLogger.info("保存 &7" + TabooLibBungee.getInstance().getPluginDataHandler().getPlugindata().size() + " &f条插件数据");
+		TLogger.info("保存 &7" + TabooLibBungee.getInstance().getPluginDataHandler().getPluginData().size() + " &f条插件数据");
 	}
 }

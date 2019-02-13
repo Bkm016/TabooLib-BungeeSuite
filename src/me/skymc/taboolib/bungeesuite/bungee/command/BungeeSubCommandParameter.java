@@ -1,16 +1,12 @@
 package me.skymc.taboolib.bungeesuite.bungee.command;
 
-import lombok.Getter;
-
 /**
  * @author Bkm016
  * @since 2018-04-17
  */
 public class BungeeSubCommandParameter {
 	
-	@Getter
 	private String name;
-	@Getter
 	private boolean required;
 	
 	public BungeeSubCommandParameter(String name, boolean required) {
@@ -20,5 +16,13 @@ public class BungeeSubCommandParameter {
 	
 	public String toString() {
 		return required ? "¡ì7[¡ì8" + name + "¡ì7]" : "¡ì7<¡ì8" + name + "¡ì7>";
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public boolean isRequired() {
+		return this.required;
 	}
 }

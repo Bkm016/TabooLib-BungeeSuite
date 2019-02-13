@@ -1,8 +1,4 @@
-/** 
- * @author Caiyong 
- * @version 1.0 
- */  
-package me.skymc.taboolib.bungeesuite.util;  
+package me.skymc.taboolib.bungeesuite.util;
   
 public class TextUtils {    
 

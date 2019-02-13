@@ -1,15 +1,17 @@
 package me.skymc.taboolib.bungeesuite.listener;
 
-import java.util.UUID;
-
+import com.google.common.io.ByteStreams;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
+import me.skymc.taboolib.bungeesuite.events.BukkitCommandEvent;
+import me.skymc.taboolib.bungeesuite.message.MessageBuilder;
+import me.skymc.taboolib.bungeesuite.message.ReadResult;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
-import me.skymc.taboolib.bungeesuite.events.BukkitCommandEvent;
-import me.skymc.taboolib.bungeesuite.logger.TLogger;
-import me.skymc.taboolib.bungeesuite.util.ArrayUtils;
-import me.skymc.taboolib.bungeesuite.util.ByteUtils;
+import java.util.Arrays;
+import java.util.UUID;
 
 /**
  * @author Bkm016
@@ -17,25 +19,26 @@ import me.skymc.taboolib.bungeesuite.util.ByteUtils;
  */
 public class ListenerBukkitMessage implements PluginMessageListener {
 
-	@Override
-	public void onPluginMessageReceived(String channel, Player player, byte[] data) {
-		if (channel.equalsIgnoreCase("taboolib|out")) {
-			String[] packet = ByteUtils.readPacket(data);
-			if (packet.length < 2) {
-				TLogger.error("Invalid PluginMessage: &c" + channel);
-				return;
-			}
-			
-			UUID uuid = null;
-			try {
-				uuid = UUID.fromString(packet[0]);
-			} catch (Exception err) {
-				TLogger.error("Invalid Task UUID: &c" + packet[0]);
-				return;
-			}
-			
-			Bukkit.getPluginManager().callEvent(new BukkitCommandEvent(player, uuid, ArrayUtils.removeFirst(packet)));
-		}
-	}
-
+    @Override
+    public void onPluginMessageReceived(String channel, Player player, byte[] data) {
+        if (channel.equalsIgnoreCase("taboolib|out")) {
+            try {
+                ReadResult readResult = MessageBuilder.readMessage(ByteStreams.newDataInput(data).readUTF());
+                if (!readResult.isFull()) {
+                    return;
+                }
+                UUID uuid = UUID.fromString(readResult.getCurrentMessages().get(0).getUid());
+                JsonArray array = (JsonArray) new JsonParser().parse(readResult.build());
+                String[] packet = new String[array.size()];
+                int bound = array.size();
+                for (int i = 0; i < bound; i++) {
+                    packet[i] = array.get(i).getAsString();
+                }
+                Bukkit.getPluginManager().callEvent(new BukkitCommandEvent(player, uuid, packet));
+                MessageBuilder.MESSAGE_CACHES.remove(uuid.toString());
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
+        }
+    }
 }

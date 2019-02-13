@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/TabooLibBukkit.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/TabooLibBungee.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bukkit/TBukkitChannel.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bukkit/command/BukkitCommand.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bukkit/command/BukkitSubCommandExecutor.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bukkit/command/BukkitSubCommandParameter.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bukkit/command/bungee/CommandBroadcast.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bukkit/command/bungee/CommandConnect.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bukkit/command/bungee/CommandConnectOther.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bukkit/command/bungee/CommandKickPlayer.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bukkit/command/bungee/CommandMessage.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bukkit/command/bungee/CommandPlayerCount.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bukkit/command/bungee/CommandPlayerList.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bukkit/command/bungee/CommandServerList.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bukkit/command/bungee/CommandWhois.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bukkit/command/playerdata/CommandPlayerDataGet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bukkit/command/playerdata/CommandPlayerDataRemove.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bukkit/command/playerdata/CommandPlayerDataSet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bungee/command/BungeeCommand.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bungee/command/BungeeSubCommandExecutor.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bungee/command/BungeeSubCommandParameter.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bungee/command/plugindata/CommandSavePluginData.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bungee/command/sub/CommandGroup.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/bungee/command/sub/CommandPermission.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/logger/TLogger.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/me/skymc/taboolib/bungeesuite/util/TagUtils.java" charset="GBK" />
+  </component>
+</project>
