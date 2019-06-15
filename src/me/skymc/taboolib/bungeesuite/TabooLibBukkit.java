@@ -47,8 +47,8 @@ public class TabooLibBukkit extends JavaPlugin {
 		Bukkit.getPluginCommand("taboolibbungeesuite").setExecutor(new BukkitCommand());
 		Bukkit.getPluginCommand("taboolibbungeesuite").setTabCompleter(new BukkitCommand());
 		
-		Bukkit.getMessenger().registerIncomingPluginChannel(this, "taboolib|out", new ListenerBukkitMessage());
-		Bukkit.getMessenger().registerOutgoingPluginChannel(this, "taboolib|in");
+		Bukkit.getMessenger().registerIncomingPluginChannel(this, "taboolib:out", new ListenerBukkitMessage());
+		Bukkit.getMessenger().registerOutgoingPluginChannel(this, "taboolib:in");
 		
 		Bukkit.getPluginManager().registerEvents(new ListenerPlayer(), this);
 		

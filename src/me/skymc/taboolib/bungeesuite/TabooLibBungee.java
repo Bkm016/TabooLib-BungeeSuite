@@ -47,8 +47,8 @@ public class TabooLibBungee extends Plugin {
 		
 		TagUtils.getInst();
 		
-		proxyServer.registerChannel("taboolib|in");
-		proxyServer.registerChannel("taboolib|out");
+		proxyServer.registerChannel("taboolib:in");
+		proxyServer.registerChannel("taboolib:out");
 		
 		proxyServer.getPluginManager().registerCommand(this, new BungeeCommand("taboolibbungeecord"));
 		

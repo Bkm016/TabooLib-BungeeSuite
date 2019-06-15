@@ -72,7 +72,7 @@ public class TBungeeChannel implements Listener {
                     ByteUtils.close(dataOutputStream);
                     ByteUtils.close(byteArrayOutputStream);
                 }
-                server.sendData("taboolib|out", byteArrayOutputStream.toByteArray());
+                server.sendData("taboolib:out", byteArrayOutputStream.toByteArray());
             }
         });
     }
