@@ -22,7 +22,7 @@ public class ListenerBungeeMessage implements Listener {
 
     @EventHandler
     public void onMessage(PluginMessageEvent e) {
-        if (!e.isCancelled() && e.getSender() instanceof Server && e.getTag().equalsIgnoreCase("taboolib:in")) {
+        if (!e.isCancelled() && e.getSender() instanceof Server && e.getTag().equalsIgnoreCase("taboolib_in")) {
             try {
                 ReadResult readResult = MessageBuilder.readMessage(ByteStreams.newDataInput(e.getData()).readUTF());
                 if (!readResult.isFull()) {

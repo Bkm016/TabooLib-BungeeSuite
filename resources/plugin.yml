@@ -1,6 +1,6 @@
 name: TabooLibBungeeSuite
 main: me.skymc.taboolib.bungeesuite.TabooLibBukkit
-version: 1.5
+version: 1.6
 author: 坏黑
 
 softdepend: [Vault]

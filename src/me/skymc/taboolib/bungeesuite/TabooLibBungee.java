@@ -44,21 +44,12 @@ public class TabooLibBungee extends Plugin {
 		playerDataHandler = new PlayerDataBungeeHandler(this);
 		permissionHandler = new PermissionBungeeHandler(bungeeChannel);
 		pluginDataHandler = new PluginDataBungeeHandler(this);
-		
-		TagUtils.getInst();
-		
-		proxyServer.registerChannel("taboolib:in");
-		proxyServer.registerChannel("taboolib:out");
-		
+		proxyServer.registerChannel("taboolib_in");
+		proxyServer.registerChannel("taboolib_out");
 		proxyServer.getPluginManager().registerCommand(this, new BungeeCommand("taboolibbungeecord"));
-		
 		BungeeCord.getInstance().getPluginManager().registerListener(this, new ListenerBungeeMessage());
 		BungeeCord.getInstance().getPluginManager().registerListener(this, new ModuleBungeeCord());
-		
-		TLogger.info("插件已载入");
-		TLogger.info("作者: &8" + getDescription().getAuthor());
-		TLogger.info("版本: &8" + getDescription().getVersion());
-		TLogger.info("框架: &8" + ServerType.getServerType());
+		TagUtils.getInst();
 	}
 	
 	@Override

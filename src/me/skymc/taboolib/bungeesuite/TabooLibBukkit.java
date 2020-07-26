@@ -43,19 +43,11 @@ public class TabooLibBukkit extends JavaPlugin {
 		playerDataHandler = new PlayerDataBukkitHandler(bukkitChannel);
 		permissionHandler = new PermissionBukkitHandler(this);
 		pluginDataHandler = new PluginDataBukkitHandler(bukkitChannel);
-		
 		Bukkit.getPluginCommand("taboolibbungeesuite").setExecutor(new BukkitCommand());
 		Bukkit.getPluginCommand("taboolibbungeesuite").setTabCompleter(new BukkitCommand());
-		
-		Bukkit.getMessenger().registerIncomingPluginChannel(this, "taboolib:out", new ListenerBukkitMessage());
-		Bukkit.getMessenger().registerOutgoingPluginChannel(this, "taboolib:in");
-		
+		Bukkit.getMessenger().registerIncomingPluginChannel(this, "taboolib_out", new ListenerBukkitMessage());
+		Bukkit.getMessenger().registerOutgoingPluginChannel(this, "taboolib_in");
 		Bukkit.getPluginManager().registerEvents(new ListenerPlayer(), this);
-		
-		TLogger.info("插件已载入");
-		TLogger.info("作者: &8" + getDescription().getAuthors());
-		TLogger.info("版本: &8" + getDescription().getVersion());
-		TLogger.info("框架: &8" + ServerType.getServerType());
 	}
 	
 	@Override
