@@ -44,8 +44,8 @@ public class TabooLibBungee extends Plugin {
 		playerDataHandler = new PlayerDataBungeeHandler(this);
 		permissionHandler = new PermissionBungeeHandler(bungeeChannel);
 		pluginDataHandler = new PluginDataBungeeHandler(this);
-		proxyServer.registerChannel("taboolib_in");
-		proxyServer.registerChannel("taboolib_out");
+		proxyServer.registerChannel("taboolib:in");
+		proxyServer.registerChannel("taboolib:out");
 		proxyServer.getPluginManager().registerCommand(this, new BungeeCommand("taboolibbungeecord"));
 		BungeeCord.getInstance().getPluginManager().registerListener(this, new ListenerBungeeMessage());
 		BungeeCord.getInstance().getPluginManager().registerListener(this, new ModuleBungeeCord());

@@ -21,7 +21,7 @@ public class ListenerBukkitMessage implements PluginMessageListener {
 
     @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] data) {
-        if (channel.equalsIgnoreCase("taboolib_out")) {
+        if (channel.equalsIgnoreCase("taboolib:out")) {
             try {
                 ReadResult readResult = MessageBuilder.readMessage(ByteStreams.newDataInput(data).readUTF());
                 if (!readResult.isFull()) {
