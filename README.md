@@ -15,7 +15,7 @@
 TBukkitChannel channel = TabooLibBukkit.getInst().getBukkitChannel();
 TBukkitChannelTask.createTask()
     .channel(channel)
-    .sender(Bukkit.getOnlinePlayer().iteraotr().next())
+    .sender(Bukkit.getOnlinePlayer().iterator().next())
     .command("Hello World!")
     .result(result -> Bukkit.broadcastMessage("Hello: " + result[0]))
     .run();
@@ -61,7 +61,7 @@ public void onCommand(BungeeCommandEvent e) {
 而不需要另外创建 **BungeeCord** 插件信息的发送与接收频道    
 ```java
 String sevrer = "Lobby";
-Player sender = Bukkit.getOnlinePlayer().iteraotr().next();
+Player sender = Bukkit.getOnlinePlayer().iterator().next();
 
 TabooLibBukkit.getInst().getBukkitChannelExecutor().playerList(sender, sevrer, new TChannelResult() {
 
